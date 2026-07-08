@@ -25,17 +25,18 @@
 (def jvm-only
   #"java\.|Integer/|Long/|Float/|System/|Thread/|Character/|\(format |\(printf ")
 
-(deftest kernel-is-cljc-portable
-  (testing "no kernel namespace uses unguarded JVM-only interop"
-    (doseq [nm kernel-namespaces]
-      (let [path (str "src/shugyo/" nm ".cljc")
-            lines (str/split-lines (slurp path))]
-        (doseq [[i line] (map-indexed vector lines)]
-          (when (re-find jvm-only line)
-            (is (str/includes? line ":clj")
-                (str path ":" (inc i)
-                     " — JVM-only interop must be #?(:clj …)-guarded: "
-                     (str/trim line)))))))))
+#?(:clj
+   (deftest kernel-is-cljc-portable
+     (testing "no kernel namespace uses unguarded JVM-only interop"
+       (doseq [nm kernel-namespaces]
+         (let [path (str "src/shugyo/" nm ".cljc")
+               lines (str/split-lines (slurp path))]
+           (doseq [[i line] (map-indexed vector lines)]
+             (when (re-find jvm-only line)
+               (is (str/includes? line ":clj")
+                   (str path ":" (inc i)
+                        " — JVM-only interop must be #?(:clj …)-guarded: "
+                        (str/trim line))))))))))
 
 (deftest root-namespace-loads-and-declares-metadata
   (is (= shugyo/adr "ADR-2607010930"))

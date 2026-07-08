@@ -24,7 +24,7 @@
     (let [obs (t/reset-all! e 0)]
       (is (= (count obs) (* 4 (+ (* 2 2) 6))))
       (is (every? #(not (Double/isNaN %)) obs)))
-    (is (thrown? Exception (ee/vectorized-ee-reach-env-new 2 arm2-urdf "nope" (reach/reach-cfg-default))))))
+    (is (thrown? #?(:clj Exception :cljs js/Error) (ee/vectorized-ee-reach-env-new 2 arm2-urdf "nope" (reach/reach-cfg-default))))))
 
 (deftest goals-are-reachable-and-seed-deterministic
   (let [a (env 3) b (env 3)
