@@ -1,4 +1,12 @@
-# kami-shugyo (e7m-shugyo 修行)
+# kotoba-lang/com-nvidia-isaac-lab (formerly kami-shugyo, e7m-shugyo 修行)
+
+> Renamed from `kami-shugyo` 2026-07-09 (ADR-2607086600) — reverse-domain
+> naming reflecting genuine, verified API-surface conformance: this targets
+> NVIDIA Isaac Lab's real, documented
+> [`isaaclab.envs.ManagerBasedRLEnv`](https://isaac-sim.github.io/IsaacLab/main/source/api/lab/isaaclab.envs.html)
+> (manager-based MDP RL task environment), confirmed against NVIDIA's own
+> API docs, not renamed on assumption alone. Clojure namespaces (`shugyo.*`)
+> are unchanged.
 
 Isaac Lab-equivalent RL training framework — `isaaclab.envs.ManagerBasedRLEnv`
 API-compat target. Zero-dependency, portable CLJC (JVM / SCI / ClojureScript /
