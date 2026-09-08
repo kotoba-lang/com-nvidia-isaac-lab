@@ -50,7 +50,7 @@
     - observation: `[num-envs, 3*n-dof]` = `[q, q̇, (q-goal - q)]`
     - reward: `-‖q - q-goal‖² - w·‖action‖²` (per env)
     - terminated: `‖q - q-goal‖∞ < goal-tol`; truncated: episode length cap"
-  (:require [shugyo.lcg :as lcg]
+  (:require [kotoba.lang.text] [shugyo.lcg :as lcg]
             [shugyo.policy :as policy]
             [shugyo.traits :as t]))
 
@@ -93,13 +93,13 @@
 ;; URDF-XML chain extractor (see namespace docstring for scope/limitations)
 ;; ---------------------------------------------------------------------------
 
-(defn- parse-double* [s] #?(:clj (Double/parseDouble (clojure.string/trim s))
-                             :cljs (js/parseFloat (clojure.string/trim s))))
+(defn- parse-double* [s] #?(:clj (Double/parseDouble (kotoba.lang.text/trim s))
+                             :cljs (js/parseFloat (kotoba.lang.text/trim s))))
 
 (defn- parse-xyz [s]
   (if (nil? s)
     [0.0 0.0 0.0]
-    (mapv parse-double* (clojure.string/split (clojure.string/trim s) #"\s+"))))
+    (mapv parse-double* (kotoba.lang.text/split (kotoba.lang.text/trim s) #"\s+"))))
 
 (defn- attr [block name]
   (second (re-find (re-pattern (str name "=\"([^\"]*)\"")) block)))
