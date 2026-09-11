@@ -38,7 +38,7 @@ Plus two integration test namespaces (`shugyo.vec-rl-env-test`,
 
 ## Test / assertion counts
 
-`clojure -M:test` — **46 tests, 867 assertions, 0 failures, 0 errors.**
+`kbb -M:test` — **46 tests, 867 assertions, 0 failures, 0 errors.**
 
 All applicable original Rust `#[test]`s were ported 1:1 (fixture-dependent
 tests adapted to construct config/scene data directly instead of loading
